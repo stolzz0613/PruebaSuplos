@@ -10,6 +10,7 @@ $.fn.scrollEnd = function(callback, timeout) {
     $this.data('scrollTimeout', setTimeout(callback,timeout));
   });
 };
+
 /*
   Función que inicializa el elemento Slider
 */
@@ -25,28 +26,76 @@ function inicializarSlider(){
     prefix: "$"
   });
 }
-/*
-  Función que reproduce el video de fondo al hacer scroll, y deteiene la reproducción al detener el scroll
-*/
-function playVideoOnScroll(){
-  var ultimoScroll = 0,
-      intervalRewind;
-  var video = document.getElementById('vidFondo');
-  $(window)
-    .scroll((event)=>{
-      var scrollActual = $(window).scrollTop();
-      if (scrollActual > ultimoScroll){
-       
-     } else {
-        //this.rewind(1.0, video, intervalRewind);
-        video.play();
-     }
-     ultimoScroll = scrollActual;
-    })
-    .scrollEnd(()=>{
-      video.pause();
-    }, 10)
+
+  /*
+    Función que generar una card para un resultado
+  */
+function generarCard(resultado, funcion, texto){
+  return $(
+          '<div class="col s6">' + 
+            '<div class="card">' + 
+              '<div class="card-image">' +
+                '<img src="img/home.jpg">' + 
+              '</div>' + 
+              '<div class="card-content">' +
+                '<p>Dirección: <span>' + resultado.Direccion + '</span> </p>' +
+                '<p>Ciudad: <span>'+ resultado.Ciudad +'</span> </p>' +
+                '<p>Telefono: <span>'+ resultado.Telefono +'</span> </p>' +
+                '<p>Codigo Postal: <span>' + resultado.Codigo_Postal + '</span> </p>' +
+                '<p>Tipo: <span>' + resultado.Tipo + '</span> </p>' +
+                '<p>Precio: <span>' + resultado.Precio + '</span> </p>' +
+                '<div class="center-align">' +
+                  '<a onclick="' + funcion + '(' + resultado.Id + ');" type="submit" class="cardGenerated waves-effect waves-light btn" name="Submit">' + texto + '</a>' +
+                '</div>' + 
+              '</div>' +
+            '</div>' + 
+          '</div>'
+        );
 }
 
-inicializarSlider();
-playVideoOnScroll();
+
+/*
+  Función que inicializa el ajax para ejecutar la transacción
+*/
+
+function agregarMisBienes(id) {
+  var resultadosFiltrados = resultadosOriginales.filter(filterFunction);
+  if(resultadosFiltrados.length == 0){
+    element = resultadosOriginales[id-1]
+  } else {
+    element = findId(resultadosFiltrados, id)
+  }
+  $.ajax({
+      type: "POST",
+      url: "insert.php",
+      data: { Submit: true, value: element }
+    }).done(function( msg ) {
+      alert( msg );
+  });
+};
+
+/*
+  Función que permite obtener un objeto del arreglo por su ID
+*/
+function findId(data, id) {
+  for (var i = 0; i < data.length; i++) {
+      if (data[i].Id == id) {
+          return(data[i]);
+      }
+  }
+};
+
+/*
+  Función que permite Iniciar la transaccion para eliminar un elemento dada su ID
+*/
+function eliminar(id) {
+  $.ajax({
+    type: "POST",
+    url: "delete.php",
+    data: { Delete: true, value: id }
+  }).done(function( msg ) {
+    alert( msg );
+    document.getElementById('ui-id-2').click();
+  });
+};
+
