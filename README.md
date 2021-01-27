@@ -15,3 +15,6 @@ Prueba suplos desarrollador backend
         - nombre base de datos:
     
     El archivo principal del proyecto es el index.php, abrirlo desde ahi para que cargue todo adecuadamente
+    
+    ![alt text](https://github.com/stolzz0613/PruebaSuplos/blob/main/Captura de Pantalla 2021-01-27 a la(s) 7.38.39 a. m..png?raw=true)
+   
