@@ -14,3 +14,4 @@ Prueba suplos desarrollador backend
         - password:
         - nombre base de datos:
     
+    El archivo principal del proyecto es el index.php, abrirlo desde ahi para que cargue todo adecuadamente
