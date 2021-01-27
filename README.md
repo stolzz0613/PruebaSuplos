@@ -16,5 +16,5 @@ Prueba suplos desarrollador backend
     
     El archivo principal del proyecto es el index.php, abrirlo desde ahi para que cargue todo adecuadamente
     
-    ![Optional Text](../master/assets/Captura de Pantalla 2021-01-27 a la(s) 7.38.39 a. m..png)
+    ![](assets/Captura%20de%20Pantalla%202021-01-27%20a%20la(s)%207.38.39%20a.%C2%A0m..png)
    
